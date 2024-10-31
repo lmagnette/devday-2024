@@ -11,11 +11,9 @@
 </div>
 
 <div class="sheep-grid">
-    <ng-container *ngFor="let sheep of sheepList | async">
-        <app-sheep-summary-card [sheep]="sheep"/>
-    </ng-container>
+  @for(sheep of sheepList|async; track sheep.id){
+    <app-sheep-summary-card [sheep]="sheep"/>
+  } @empty {
+    <mat-card>No sheep found</mat-card>
+  }
 </div>
-
-<ng-template #noSheep>
-    <p>No sheep found.</p>
-</ng-template>
