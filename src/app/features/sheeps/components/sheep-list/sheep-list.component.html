@@ -1,0 +1,21 @@
+<div class="search">
+    <mat-form-field class="example-form-field">
+        <mat-label>Filter</mat-label>
+        <input matInput type="text" [(ngModel)]="searchValue">
+        @if (searchValue) {
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        }
+    </mat-form-field>
+</div>
+
+<div class="sheep-grid">
+    <ng-container *ngFor="let sheep of sheepList | async">
+        <app-sheep-summary-card [sheep]="sheep"/>
+    </ng-container>
+</div>
+
+<ng-template #noSheep>
+    <p>No sheep found.</p>
+</ng-template>
