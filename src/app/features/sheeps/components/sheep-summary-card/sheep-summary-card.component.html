@@ -3,7 +3,7 @@
     <mat-card-title>{{ sheep.name }}</mat-card-title>
     <mat-card-actions>
         <button mat-icon-button (click)="like()">
-            <mat-icon>favorite</mat-icon>
+            <mat-icon [matBadge]="likeCount()">favorite</mat-icon>
         </button>
         <a mat-icon-button [routerLink]="'./'+sheep.id">
             <mat-icon>visibility</mat-icon>
