@@ -1,4 +1,4 @@
-import {Component, computed, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, effect, inject, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {SheepSummaryCardComponent} from "../sheep-summary-card/sheep-summary-card.component";
@@ -40,6 +40,13 @@ export class SheepListComponent implements OnInit {
       const sheeps = this.sheepList();
       return sheeps.filter( s => s.name.toUpperCase().includes(search.toUpperCase()));
     })
+  likes=signal<number>(0);
+
+  constructor() {
+    effect(() => {
+      this.sheepLiked(this.likes());
+    });
+  }
 
     ngOnInit(): void {
     }

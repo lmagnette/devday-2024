@@ -12,7 +12,7 @@
 
 <div class="sheep-grid">
   @for(sheep of filteredSheepList(); track sheep.id){
-    <app-sheep-summary-card [sheep]="sheep" (likeCountChanged)="sheepLiked($event)"/>
+    <app-sheep-summary-card [sheep]="sheep" [(likeCount)]="likes"/>
   } @empty {
     <mat-card>No sheep found</mat-card>
   }
