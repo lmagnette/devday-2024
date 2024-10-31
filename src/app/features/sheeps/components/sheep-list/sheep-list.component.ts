@@ -9,6 +9,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {SheepService} from "../../services/sheep.service";
 import {toSignal} from '@angular/core/rxjs-interop';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -32,6 +33,7 @@ import {toSignal} from '@angular/core/rxjs-interop';
 export class SheepListComponent implements OnInit {
     service = inject(SheepService);
     sheepList = toSignal(this.service.list(), {initialValue:[]});
+    snackbar = inject(MatSnackBar);
     searchValue= signal<string>('');
     filteredSheepList = computed(() => {
       const search = this.searchValue();
@@ -41,4 +43,10 @@ export class SheepListComponent implements OnInit {
 
     ngOnInit(): void {
     }
+
+  sheepLiked(like: number) {
+    if(like)
+      this.snackbar.open(`A sheep has been liked ${like} times`);
+
+  }
 }
