@@ -14,12 +14,16 @@
   <mat-card-content>
     <div class="temperament">
       <mat-icon>
-        @if (sheep.temperament === 'Calm') {
-          self_improvement
-        } @else if (sheep.temperament === 'Aggressive') {
-          local_fire_department
-        } @else {
-          gamepad
+        @switch (sheep.temperament){
+          @case ('Calm'){
+            self_improvement
+          }
+          @case ('Aggressive'){
+            local_fire_department
+          }
+          @default {
+            gamepad
+          }
         }
       </mat-icon>
       {{ sheep.temperament }}
