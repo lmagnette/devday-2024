@@ -1,0 +1,11 @@
+<mat-card>
+    @if(sheeps.isLoading()){
+      Loading...
+    } @else if(sheeps.error()) {
+      Oups an error occurred
+    } @else {
+      <pre>
+        {{sheeps.value() | json }}
+      </pre>
+    }
+</mat-card>
