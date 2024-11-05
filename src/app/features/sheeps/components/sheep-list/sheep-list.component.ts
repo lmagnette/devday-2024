@@ -1,4 +1,4 @@
-import {Component, computed, inject, OnInit, signal, effect, linkedSignal} from '@angular/core';
+import {Component, computed, effect, inject, linkedSignal, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {SheepSummaryCardComponent} from "../sheep-summary-card/sheep-summary-card.component";
@@ -9,7 +9,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {SheepService} from "../../services/sheep.service";
 import {MatToolbar} from '@angular/material/toolbar';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {SheepPopupComponent} from '../sheep-popup/sheep-popup.component';
 import {Sheep} from '../../models/sheep';
 import {MatSnackBar} from '@angular/material/snack-bar';
