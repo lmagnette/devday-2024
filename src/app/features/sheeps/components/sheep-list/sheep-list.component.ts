@@ -1,4 +1,4 @@
-import {Component, computed, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, OnInit, signal, effect} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {SheepSummaryCardComponent} from "../sheep-summary-card/sheep-summary-card.component";
@@ -42,11 +42,16 @@ export class SheepListComponent implements OnInit {
     snackbar = inject(MatSnackBar);
     sheepList = toSignal(this.service.list(), {initialValue:[]});
     searchValue = signal<string>('');
+    like = signal<number>(0);
 
     filteredList = computed<Sheep[]>( () => {
       const value = this.searchValue();
       return this.sheepList().filter(s => s.name.toLowerCase().includes(value.toLowerCase()));
     })
+
+  constructor(){
+      effect(() => this.sheepLiked(this.like()));
+  }
 
     ngOnInit(): void {
     }
