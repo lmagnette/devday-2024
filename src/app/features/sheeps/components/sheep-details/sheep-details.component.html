@@ -1,7 +1,13 @@
 <mat-card class="sheep-detail-card">
   <div class="sheep-container">
     <div class="sheep-image">
-      <img [src]="sheep.imageUrl" alt="{{ sheep.name }}"/>
+      @if (image.isLoading()) {
+        Loading...
+      } @else if (image.error()) {
+        <img [src]="sheep.imageUrl" alt="{{ sheep.name }}"/>
+      } @else {
+        <img [src]="image.value()" alt="{{ sheep.name }}"/>
+      }
     </div>
   </div>
 </mat-card>
@@ -11,13 +17,13 @@
   </mat-card-header>
   <mat-card-content>
     <div class="temperament">
-      @let temp = sheep.temperament;
+      @let temp = sheep.temperament ;
       <mat-icon>
-        @switch (temp){
-          @case ('Calm'){
+        @switch (temp) {
+          @case ('Calm') {
             self_improvement
           }
-          @case ('Aggressive'){
+          @case ('Aggressive') {
             local_fire_department
           }
           @default {
@@ -48,7 +54,7 @@
 }
 @defer (on timer(3s)) {
   <app-posts [id]="sheep.id"/>
-}@placeholder (minimum 2s) {
+} @placeholder (minimum 2s) {
   <app-posts-placeholder/>
 } @loading (minimum 5s) {
   <app-posts-loading/>

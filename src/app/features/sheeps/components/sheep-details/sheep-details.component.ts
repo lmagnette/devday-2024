@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, resource} from '@angular/core';
 import {CommonModule, NgIf} from "@angular/common";
 import {MatCardModule} from "@angular/material/card";
 import {Sheep} from "../../models/sheep";
@@ -26,4 +26,14 @@ import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 })
 export class SheepDetailsComponent {
   @Input({required:true}) sheep!: Sheep;
+
+  image = resource({
+      loader: () => fetch('http://localhost:8080/sheep', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.sheep),
+      }).then(body => body.text())
+    });
 }
