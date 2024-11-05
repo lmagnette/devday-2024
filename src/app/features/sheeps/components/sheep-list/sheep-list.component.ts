@@ -1,4 +1,4 @@
-import {Component, computed, inject, OnInit, signal, effect} from '@angular/core';
+import {Component, computed, inject, OnInit, signal, effect, linkedSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {SheepSummaryCardComponent} from "../sheep-summary-card/sheep-summary-card.component";
@@ -40,9 +40,11 @@ export class SheepListComponent implements OnInit {
     service = inject(SheepService);
     dialog = inject(MatDialog);
     snackbar = inject(MatSnackBar);
-    sheepList = toSignal(this.service.list(), {initialValue:[]});
+    httpList = toSignal(this.service.list(), {initialValue:[]});
     searchValue = signal<string>('');
     like = signal<number>(0);
+    sheepList = linkedSignal<Sheep[]>(() => this.httpList());
+
 
     filteredList = computed<Sheep[]>( () => {
       const value = this.searchValue();
@@ -81,6 +83,7 @@ export class SheepListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('New Sheep Data:', result);
+        this.sheepList.update( v => [...v,result]);
         // Handle the result data, e.g., save it to the database
       }
     });
