@@ -1,4 +1,4 @@
-import {Component, effect, inject, Input, signal} from '@angular/core';
+import {Component, effect, inject, input, signal} from '@angular/core';
 import {MatCard, MatCardActions, MatCardImage, MatCardTitle} from "@angular/material/card";
 import {NgOptimizedImage} from "@angular/common";
 import {Sheep} from "../../models/sheep";
@@ -27,7 +27,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class SheepSummaryCardComponent {
 
-  @Input({required:true}) sheep!: Sheep;
+  sheep = input.required<Sheep>()
 
   likeCount = signal<number>(0);
 
