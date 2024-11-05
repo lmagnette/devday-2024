@@ -1,6 +1,6 @@
-import {Component, effect, inject, model} from '@angular/core';
+import {Component, effect, inject, model, resource, ResourceRef} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatFormField, MatLabel, MatSuffix} from '@angular/material/form-field';
+import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatInput} from '@angular/material/input';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -20,10 +20,7 @@ import {MatIcon} from '@angular/material/icon';
     ReactiveFormsModule,
     MatSelect,
     MatOption,
-    MatLabel,
-    MatIconButton,
-    MatIcon,
-    MatSuffix
+    MatLabel
   ],
   templateUrl: './sheep-popup.component.html',
   styleUrl: './sheep-popup.component.scss'
@@ -33,6 +30,7 @@ export class SheepPopupComponent {
   readonly data = inject<Sheep>(MAT_DIALOG_DATA);
   readonly animal = model(this.data);
   private readonly fb: FormBuilder = inject(FormBuilder);
+
 
 
   sheepForm: FormGroup;
@@ -65,9 +63,5 @@ export class SheepPopupComponent {
   }
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  generateImageUrl() {
-
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, resource, ResourceRef} from '@angular/core';
 import {MatCard, MatCardActions, MatCardImage, MatCardTitle} from "@angular/material/card";
 import {NgOptimizedImage} from "@angular/common";
 import {Sheep} from "../../models/sheep";
@@ -13,12 +13,12 @@ import {RouterLink} from "@angular/router";
     MatCardImage,
     MatCardTitle,
     MatCard,
-    NgOptimizedImage,
     MatIcon,
     MatCardActions,
     MatIconButton,
     MatIconAnchor,
-    RouterLink
+    RouterLink,
+    NgOptimizedImage,
   ],
   templateUrl: './sheep-summary-card.component.html',
   styleUrl: './sheep-summary-card.component.scss'

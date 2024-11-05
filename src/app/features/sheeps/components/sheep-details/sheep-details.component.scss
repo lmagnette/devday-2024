@@ -16,13 +16,15 @@
   background-color: #f5f5f5; /* Light background to separate the image */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for separation */
-}
 
-.sheep-image img {
+}
+.sheep-image > img {
   width: 100%;
   height: auto;
   border-radius: 8px;
   object-fit: cover;
+  max-height: 500px;
+  max-width: 500px;
 }
 
 .sheep-details {
