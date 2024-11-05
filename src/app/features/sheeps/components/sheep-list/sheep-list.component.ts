@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, computed, inject, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {SheepSummaryCardComponent} from "../sheep-summary-card/sheep-summary-card.component";
@@ -11,7 +11,8 @@ import {SheepService} from "../../services/sheep.service";
 import {MatToolbar} from '@angular/material/toolbar';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SheepPopupComponent} from '../sheep-popup/sheep-popup.component';
-import {Sheep} from '../../models/sheep'; // Import Angular Material Card module
+import {Sheep} from '../../models/sheep';
+import {toSignal} from '@angular/core/rxjs-interop'; // Import Angular Material Card module
 
 
 @Component({
@@ -37,8 +38,13 @@ export class SheepListComponent implements OnInit {
     // Using Angular signals to manage the sheep list reactively
     service = inject(SheepService);
     dialog = inject(MatDialog);
-    sheepList = this.service.list();
-    searchValue: string = '';
+    sheepList = toSignal(this.service.list(), {initialValue:[]});
+    searchValue = signal<string>('');
+
+    filteredList = computed<Sheep[]>( () => {
+      const value = this.searchValue();
+      return this.sheepList().filter(s => s.name.toLowerCase().includes(value.toLowerCase()));
+    })
 
     ngOnInit(): void {
     }

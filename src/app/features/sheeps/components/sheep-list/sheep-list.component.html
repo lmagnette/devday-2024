@@ -7,8 +7,8 @@
   <mat-form-field class="example-form-field">
     <mat-label>Filter</mat-label>
     <input matInput type="text" [(ngModel)]="searchValue">
-    @if (searchValue) {
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+    @if (searchValue()) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="searchValue.set('')">
         <mat-icon>close</mat-icon>
       </button>
     }
@@ -19,7 +19,7 @@
 </mat-toolbar>
 
 <div class="sheep-grid">
-  @for(sheep of sheepList| async; track sheep.id){
+  @for(sheep of filteredList(); track sheep.id){
     <app-sheep-summary-card [sheep]="sheep"/>
   } @empty {
     <p>Aucun mouton trouvé</p>
