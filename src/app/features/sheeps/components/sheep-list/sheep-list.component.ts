@@ -7,24 +7,26 @@ import {MatInput} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
-import {SheepService} from "../../services/sheep.service"; // Import Angular Material Card module
+import {SheepService} from "../../services/sheep.service";
+import {MatToolbar} from '@angular/material/toolbar'; // Import Angular Material Card module
 
 
 @Component({
     selector: 'app-sheep-list',
     standalone: true,
-    imports: [
-        CommonModule,
-        MatCardModule,
-        SheepSummaryCardComponent,
-        MatSuffix,
-        MatFormField,
-        MatInput,
-        FormsModule,
-        MatIcon,
-        MatLabel,
-        MatIconButton
-    ], // Standalone component with Angular Material
+  imports: [
+    CommonModule,
+    MatCardModule,
+    SheepSummaryCardComponent,
+    MatSuffix,
+    MatFormField,
+    MatInput,
+    FormsModule,
+    MatIcon,
+    MatLabel,
+    MatIconButton,
+    MatToolbar
+  ], // Standalone component with Angular Material
     templateUrl: './sheep-list.component.html',
     styleUrls: ['./sheep-list.component.scss']
 })
