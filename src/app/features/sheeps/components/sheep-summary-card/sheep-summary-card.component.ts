@@ -1,4 +1,4 @@
-import {Component, Input, resource, ResourceRef} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MatCard, MatCardActions, MatCardImage, MatCardTitle} from "@angular/material/card";
 import {NgOptimizedImage} from "@angular/common";
 import {Sheep} from "../../models/sheep";

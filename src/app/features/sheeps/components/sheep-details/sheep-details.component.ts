@@ -1,4 +1,4 @@
-import {Component, Input, resource} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {CommonModule, NgIf} from "@angular/common";
 import {MatCardModule} from "@angular/material/card";
 import {Sheep} from "../../models/sheep";
