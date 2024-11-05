@@ -1,4 +1,4 @@
-import {Component, Input, signal} from '@angular/core';
+import {Component, effect, inject, Input, signal} from '@angular/core';
 import {MatCard, MatCardActions, MatCardImage, MatCardTitle} from "@angular/material/card";
 import {NgOptimizedImage} from "@angular/common";
 import {Sheep} from "../../models/sheep";
@@ -6,6 +6,7 @@ import {MatIconAnchor, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
 import {MatBadge} from '@angular/material/badge';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sheep-summary-card',
@@ -28,7 +29,18 @@ export class SheepSummaryCardComponent {
 
   @Input({required:true}) sheep!: Sheep;
 
-  likeCount = signal<number>(0)
+  likeCount = signal<number>(0);
+
+  snackbar = inject(MatSnackBar);
+
+  constructor() {
+    effect(() => {
+      const like = this.likeCount();
+      if(like > 0){
+        this.snackbar.open(`${this.sheep.name} has been liked ${like} times`);
+      }
+    });
+  }
 
   like() {
     this.likeCount.update(v => v+1);
