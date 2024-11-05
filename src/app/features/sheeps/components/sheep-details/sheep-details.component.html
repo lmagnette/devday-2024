@@ -46,6 +46,16 @@
     </mat-card-content>
   </mat-card>
 }
-
-<app-posts [id]="sheep.id"/>
-
+@defer (on timer(3s)) {
+  <app-posts [id]="sheep.id"/>
+}@placeholder (minimum 2s) {
+  <app-posts-placeholder/>
+} @loading (minimum 5s) {
+  <app-posts-loading/>
+} @error {
+  <mat-card class="sheep-detail-card">
+    <mat-card-header>
+      An error occurred
+    </mat-card-header>
+  </mat-card>
+}
