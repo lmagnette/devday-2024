@@ -12,6 +12,7 @@ import {MatToolbar} from '@angular/material/toolbar';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SheepPopupComponent} from '../sheep-popup/sheep-popup.component';
 import {Sheep} from '../../models/sheep';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {toSignal} from '@angular/core/rxjs-interop'; // Import Angular Material Card module
 
 
@@ -38,6 +39,7 @@ export class SheepListComponent implements OnInit {
     // Using Angular signals to manage the sheep list reactively
     service = inject(SheepService);
     dialog = inject(MatDialog);
+    snackbar = inject(MatSnackBar);
     sheepList = toSignal(this.service.list(), {initialValue:[]});
     searchValue = signal<string>('');
 
@@ -47,6 +49,11 @@ export class SheepListComponent implements OnInit {
     })
 
     ngOnInit(): void {
+    }
+
+    sheepLiked(count:number){
+      if(count>0)
+        this.snackbar.open(`A sheep has been liked ${count} times`);
     }
 
 

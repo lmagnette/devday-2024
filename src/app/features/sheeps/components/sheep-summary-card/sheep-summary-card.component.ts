@@ -1,4 +1,4 @@
-import {Component, effect, inject, input, signal} from '@angular/core';
+import {Component, effect, inject, input, output, signal} from '@angular/core';
 import {MatCard, MatCardActions, MatCardImage, MatCardTitle} from "@angular/material/card";
 import {NgOptimizedImage} from "@angular/common";
 import {Sheep} from "../../models/sheep";
@@ -30,19 +30,23 @@ export class SheepSummaryCardComponent {
   sheep = input.required<Sheep>()
 
   likeCount = signal<number>(0);
+  likeCountChanged = output<number>();
 
   snackbar = inject(MatSnackBar);
 
   constructor() {
+    /*
     effect(() => {
       const like = this.likeCount();
       if(like > 0){
         this.snackbar.open(`${this.sheep.name} has been liked ${like} times`);
       }
     });
+    */
   }
 
   like() {
     this.likeCount.update(v => v+1);
+    this.likeCountChanged.emit(this.likeCount());
   }
 }
