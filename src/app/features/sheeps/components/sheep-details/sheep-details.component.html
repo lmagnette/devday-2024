@@ -13,12 +13,16 @@
     <div class="temperament">
       @let temp = sheep.temperament;
       <mat-icon>
-        @if(temp === 'Calm'){
-          self_improvement
-        }@else if(temp === 'Aggressive'){
-          local_fire_department
-        }@else {
-          gamepad
+        @switch (temp){
+          @case ('Calm'){
+            self_improvement
+          }
+          @case ('Aggressive'){
+            local_fire_department
+          }
+          @default {
+            gamepad
+          }
         }
       </mat-icon>
       {{ temp }}
