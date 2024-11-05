@@ -8,7 +8,10 @@ import {FormsModule} from "@angular/forms";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {SheepService} from "../../services/sheep.service";
-import {MatToolbar} from '@angular/material/toolbar'; // Import Angular Material Card module
+import {MatToolbar} from '@angular/material/toolbar';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {SheepPopupComponent} from '../sheep-popup/sheep-popup.component';
+import {Sheep} from '../../models/sheep'; // Import Angular Material Card module
 
 
 @Component({
@@ -33,9 +36,35 @@ import {MatToolbar} from '@angular/material/toolbar'; // Import Angular Material
 export class SheepListComponent implements OnInit {
     // Using Angular signals to manage the sheep list reactively
     service = inject(SheepService);
+    dialog = inject(MatDialog);
     sheepList = this.service.list();
     searchValue: string = '';
 
     ngOnInit(): void {
     }
+
+
+  openSheepForm() {
+    const newSheep:Sheep = {
+      id: 1001,
+      name: '',
+      age: 10,
+      breed: 'unkown',
+      woolColor: 'unkown',
+      isSheared: false,
+      weight: 50 ,
+      imageUrl: './assets/images/unknown.webp',
+      description:'',
+      temperament: 'Calm'
+    };
+
+    const dialogRef = this.dialog.open(SheepPopupComponent, {data: newSheep});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('New Sheep Data:', result);
+        // Handle the result data, e.g., save it to the database
+      }
+    });
+  }
 }
