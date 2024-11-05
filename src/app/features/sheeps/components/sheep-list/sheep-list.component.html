@@ -19,9 +19,11 @@
 </mat-toolbar>
 
 <div class="sheep-grid">
-    <ng-container *ngFor="let sheep of sheepList | async">
-        <app-sheep-summary-card [sheep]="sheep"/>
-    </ng-container>
+  @for(sheep of sheepList| async; track sheep.id){
+    <app-sheep-summary-card [sheep]="sheep"/>
+  } @empty {
+    <p>Aucun mouton trouvé</p>
+  }
 </div>
 
 <ng-template #noSheep>
